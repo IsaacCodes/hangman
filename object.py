@@ -15,7 +15,7 @@ def font(size: int):
 
 #Basic object class
 class Object(pg.sprite.Sprite):
-  def __init__(self, pos: "tuple[int, int]", group: bool, layer: int):
+  def __init__(self, pos: tuple[int, int], group: bool, layer: int):
     #Sprite class parent
     super().__init__()
     #Converts image type + alpha
@@ -30,7 +30,7 @@ class Object(pg.sprite.Sprite):
 
 #Text class
 class Text(Object):
-  def __init__(self, pos: "tuple[int, int]", text: str, text_size=24, text_color="black", group=True, layer=0):
+  def __init__(self, pos: tuple[int, int], text: str, text_size=24, text_color="black", group=True, layer=0):
 
     #Stores vars
     self.text = text
@@ -43,7 +43,7 @@ class Text(Object):
     #Object parent
     super().__init__(pos, group, layer)
 
-  def update(self, new_text):
+  def update(self, new_text: str):
     #If text is changing
     if new_text != self.text:
       #Store and updates the text
@@ -51,7 +51,7 @@ class Text(Object):
       self.image = self.font.render(new_text, True, self.text_color)
 
 class MultiText(list):
-  def __init__(self, pos: "tuple[int, int]", text: str, text_size=24, text_color="black", line_buffer=0, group=True, layer=0):
+  def __init__(self, pos: tuple[int, int], text: str, text_size=24, text_color="black", line_buffer=0, group=True, layer=0):
     #Stores lines of text
     lines = []
     text_lines = text.split("\n")
@@ -67,7 +67,7 @@ class MultiText(list):
 
 #Rectangle class
 class Rectangle(Object):
-  def __init__(self, pos: "tuple[int, int]", size: "tuple[int, int]", color="black", border_size=0, border_color="black", corner_rounding=0, text="", text_size=24, text_color="black", line_buffer=0, group=True, layer=0):
+  def __init__(self, pos: tuple[int, int], size: tuple[int, int], color="black", border_size=0, border_color="black", corner_rounding=0, text="", text_size=24, text_color="black", line_buffer=0, group=True, layer=0):
     #Creates the base rectangle
     self.image = pg.Surface(size, pg.SRCALPHA)
     pg.draw.rect(self.image, color, pg.Rect((0, 0), size), 0, corner_rounding)
@@ -95,7 +95,7 @@ class Rectangle(Object):
 
 #Circle class
 class Circle(Object):
-  def __init__(self, pos: "tuple[int, int]", diameter: int, color="black", border_size=0, border_color="black", group=True, layer=0):    
+  def __init__(self, pos: tuple[int, int], diameter: int, color="black", border_size=0, border_color="black", group=True, layer=0):    
     #Alpha compatible image + draw interior circle on it
     self.image = pg.Surface((diameter, diameter), pg.SRCALPHA)
     pg.draw.circle(self.image, color, (diameter//2, diameter//2), diameter//2)
@@ -108,7 +108,7 @@ class Circle(Object):
 
 #Custom image class
 class Image(Object):
-  def __init__(self, pos: "tuple[int, int]", file: str, size=(0, 0), smooth=True, group=True, layer=0):
+  def __init__(self, pos: tuple[int, int], file: str, size=(0, 0), smooth=True, group=True, layer=0):
     #Loads image
     self.image = pg.image.load(f"{settings.dir}//images//{file}")
 

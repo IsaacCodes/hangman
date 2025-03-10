@@ -13,7 +13,7 @@ pg.display.set_caption("Hangman")
 
 
 #Main function
-def main(skip_menu):
+def main(skip_menu: bool) -> tuple[bool, bool]:
   #Creates menu objects
   title = object.Text((settings.width/2, 35), "Hangman", text_size=48)
   desc = object.MultiText((settings.width/2, 100), "Hit \"Play!\",\n Then guess the word by clicking one letter at a time.\n After six wrong guesses, you lose, so be careful!", text_size=20, text_color="gray30", line_buffer = 5)
@@ -53,7 +53,7 @@ def main(skip_menu):
     for event in pg.event.get():
       #Quit
       if event.type == pg.QUIT:
-        return False
+        return False, False
       #Left click
       left_click = event.type == pg.MOUSEBUTTONDOWN and event.button == 1
       key_press = event.type == pg.KEYDOWN
