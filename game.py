@@ -11,7 +11,7 @@ pg.init()
 #The letter objects on the keyboard
 class Letter(object.Rectangle):
   #Creates letter
-  def __init__(self, pos: "tuple[int, int]", letter: str, keyboard, answer, man):
+  def __init__(self, pos: tuple[int, int], letter: str, keyboard, answer, man):
     #Parent rectangle
     super().__init__(pos, (40, 40), color="white", border_size=3, border_color="black", corner_rounding=20, text=letter, text_size=24, text_color="black", group=False)
 
@@ -67,7 +67,7 @@ class Answer(object.Text):
     super().__init__((settings.width/2, 30), " ".join(self.blanks), group=False)
 
   #Reveals a letter
-  def reveal(self, letter):
+  def reveal(self, letter: str):
     for i in range(len(self.word)):
       if self.word[i].lower() == letter:
         self.blanks[i] = self.word[i]
